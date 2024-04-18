@@ -72,7 +72,7 @@ export class LoginPageComponent {
         password: this.loginForm.value.password ?? '',
       }
 
-      await handleSignIn({username: formData.username, password: formData.password})
+      await handleSignIn({username: formData.username, password: formData.password}, this.credentialService, this.messageService, this.router)
 
       this.credentialService.setLogin(true);
 
@@ -95,7 +95,7 @@ export class LoginPageComponent {
       await handleSignUpConfirmation({username: formData.username, confirmationCode: formData.code});
       console.log("Confirmation complete")
       console.log(formData.username + ' ' + this.signupForm.value.password)
-      await handleSignIn({username: formData.username, password: this.signupForm.value.password ?? ''})
+      await handleSignIn({username: formData.username, password: this.signupForm.value.password ?? ''}, this.credentialService, this.messageService, this.router)
       this.credentialService.setLogin(true);
       this.credentialService.setUsername(formData.username);
       this.messageService.add({ key: 'bc', severity: 'success', summary: 'Signed Up', detail: 'Will redirect in 1 second' });
@@ -169,18 +169,30 @@ async function handleSignUpConfirmation({
   }
 }
 
-async function handleSignIn({ username, password }: SignInInput) {
+async function handleSignIn({ username, password }: SignInInput, credentialService: CredentailsService, messageService: MessageService, router: Router) {
   try {
     const user = await signIn({ username, password });
+
+    credentialService.setEmail(username);
     
-    if (user) {
+    if (!user.isSignedIn) {
+      alert("Error: Account not Verified, Please contact us or create a new account to resolve this issue")
+      credentialService.setLogin(false);
+    }
+    else if (user) {
       console.log('User signed in successfully.');
+      credentialService.setLogin(true);
+
+      messageService.add({ key: 'tc', severity: 'success', summary: 'Signed In', detail: 'Page will redirect in 1 second'});
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      router.navigate(['']);
     } else {
       console.log('Sign in failed.');
+      credentialService.setLogin(false);
     }
   } catch (error) {
-    alert(error);
-    console.log('error signing in', error);
-    window.location.reload();
+    const alertError = String(error);
+    messageService.add({ key: 'tc', severity: 'error', summary: 'Error', detail: alertError});
+    credentialService.setLogin(false);
   }
 }
