@@ -1,0 +1,151 @@
+::ng-deep body {
+    margin: 0;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    font-family: 'Jost', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+}
+
+.wrapper {
+    margin-top: 125px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signupbox {
+    width: 350px;
+    height: 500px;
+    background: linear-gradient(to top, #0f0c29, #302b63, #24243e);
+    overflow: hidden;
+    box-shadow: 0px 20px 50px black;
+    border-radius: 16px;
+    padding: 1%;
+}
+
+.code-confirm input {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.signup, .login {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease-in-out;
+}
+
+.signuplabel {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 200%;
+    font-weight: bold;
+}
+
+.login {
+    padding: 5%;
+    height: 460px;
+    background-color:  white;
+    border-radius: 60% / 10%;
+    transform: translateY(-150px);
+}
+
+.code-confirm {
+    color: #463f94;
+    padding: 5%;
+    height: 460px;
+    background-color:  white;
+    border-radius: 60% / 10%;
+    opacity: 0;
+    visibility: hidden; 
+    transform: translateY(-325px);
+    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
+}
+
+p {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.login label{
+    color: #463f94;
+    margin-bottom: 20%;
+}
+
+.signup .signuplabel {
+    margin-top: 20%;
+}
+
+p-button {
+    margin-top: 5%;
+    justify-content: center;
+    display: flex;
+    transition: all 0.2s ease-in;
+}
+
+p-floatlabel {
+    margin-top: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+label {
+    transition: all 0.5s ease-in-out;
+}
+
+p-password {
+    padding: 0px;
+}
+
+.code-grabber input {
+    text-align: center;
+}
+
+.code-grabber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input {
+    width: 278px;
+}
+
+.forgot {
+    display: flex;
+    height: 238px;
+    align-items: center;
+    justify-content: center;
+}
+a {
+    text-decoration: none;
+    color: #463f94;
+}
+
+#checkbox {
+    display: none;
+}
+
+#checkbox:checked ~ .login {
+    transform: translateY(-500px);
+}
+
+#checkbox:checked ~ .signup label {
+    transform: scale(0.6);
+}
+
+#checkbox:checked ~ .login label {
+    transform: scale(1);
+}
+
+#checkbox:checked ~ .signup .code-confirm {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}

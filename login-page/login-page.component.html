@@ -1,0 +1,66 @@
+<div class="wrapper">
+    <div class="signupbox">
+        <input type="checkbox" id="checkbox" aria-hidden="true" [disabled]="showCode">
+    
+        <div class="signup">
+            <form action="" [formGroup]="signupForm" (ngSubmit)="onSignUp()">
+                <label for="checkbox" class="signuplabel" aria-hidden="true">Sign Up</label>
+    
+                <p-floatLabel>
+                    <input id="username" type="text" pInputText formControlName="username"/>
+                    <label for="username">Username</label>
+                </p-floatLabel>
+    
+                <p-floatLabel>
+                    <input id="email" type="email" pInputText formControlName="email" autocomplete="email"/>
+                    <label for="email">Email</label>
+                </p-floatLabel>
+    
+                <p-floatLabel>
+                    <p-password [toggleMask]="true" formControlName="password"></p-password>
+                    <label for="email">Password</label>
+                </p-floatLabel>
+    
+                <p-button [outlined]="true" [raised]="true" type="submit" label="Sign Up"></p-button>
+            </form>
+    
+            <div class="code-confirm" [ngStyle]="{'opacity': showCode ? 1 : 0, 'visibility': showCode ? 'visible' : 'hidden'}">
+                <form action="" [formGroup]="confirmCodeForm" (ngSubmit)="onConfirm()">
+                    <label for="checkbox" class="signuplabel" aria-hidden="true">Verify</label>
+                    <p>A verification code was sent to your email</p>
+    
+                    <div class="code-grabber">
+                        <input [maxlength]="6" pInputText
+                        inputId="integeronly" formControlName="code"/>
+                    </div>
+    
+                    <p-button type="submit" label="Confirm" [outlined]="true" [raised]="true"></p-button>
+                </form>
+            </div>
+        </div>
+    
+        <div class="login">
+            <label for="checkbox" class="signuplabel" aria-hidden="true">Login</label>
+            <form action="" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <p-floatLabel>
+                    <input type="text" pInputText formControlName="username"/>
+                    <label for="username">Email</label>
+                </p-floatLabel>
+    
+                <p-floatLabel>
+                    <p-password [toggleMask]="true" formControlName="password" 
+                    [feedback]=false></p-password>
+                    <label for="email">Password</label>
+                </p-floatLabel>
+    
+                <p-button [outlined]="true" [raised]="true" type="submit" label="Login"></p-button>
+            </form>
+
+            <div class="forgot">
+                <a href="/recovery">Forgot your Password?</a>
+            </div>
+        </div>
+    
+        <p-toast position="bottom-center" key="bc"></p-toast>
+    </div>
+</div>
